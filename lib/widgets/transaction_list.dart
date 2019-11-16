@@ -32,42 +32,24 @@ class TransactionList extends StatelessWidget {
             : ListView.builder(
                 itemBuilder: (ctx, index) {
                   return Card(
-                      child: Row(
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          '\$ ${transactions[index].amount.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.purple,
-                          ),
-                        ),
-                        margin: EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.purple, width: 2),
-                        ),
-                        padding: EdgeInsets.all(10),
+                    elevation: 6,
+                    child: ListTile(
+                      title: Text(
+                        "${transactions[index].title}",
+                        style: Theme.of(context).textTheme.title,
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            transactions[index].title,
-                            style: Theme.of(context).textTheme.title,
+                      subtitle: Text("${DateFormat.yMMMd().format(transactions[index].date)}"),
+                      leading: CircleAvatar(
+                        radius: 30,
+                        child: Padding(
+                          padding: EdgeInsets.all(6),
+                          child: FittedBox(
+                            child: Text("\$${transactions[index].amount}"),
                           ),
-                          Text(
-                            DateFormat('dd/MM/yyyy')
-                                .format(transactions[index].date),
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ));
+                        ),
+                      ),
+                    )
+                  );
                 },
                 itemCount: transactions.length,
               ));
