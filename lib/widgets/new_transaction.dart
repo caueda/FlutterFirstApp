@@ -16,10 +16,15 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime _selectedDate;
 
   void _submitData() {
+
+    if(_amountController.text.isEmpty){
+      return;
+    }
+
     final title = _titleController.text;
     final amount = double.tryParse(_amountController.text);
 
-    if(title.isEmpty || amount <= 0){
+    if(title.isEmpty || amount <= 0 || _selectedDate == null){
       return;
     }
 
