@@ -10,6 +10,7 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return transactions.isEmpty
         ? LayoutBuilder(builder: (ctx, constraints){
           return
@@ -51,7 +52,13 @@ class TransactionList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    trailing: IconButton(
+                    trailing: mediaQuery.size.width > 360 ?
+                        FlatButton.icon(
+                            onPressed: () => deleteTx(transactions[index].id),
+                            icon: Icon(Icons.delete),
+                            textColor: Theme.of(context).errorColor,
+                            label: Text("Delete"))
+                    :IconButton(
                       icon: Icon(Icons.delete),
                       color: Theme.of(context).errorColor,
                       onPressed: () => deleteTx(transactions[index].id),
